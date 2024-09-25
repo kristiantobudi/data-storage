@@ -43,6 +43,9 @@ const ItemTable: React.FC = () => {
       <table className="w-full border-collapse border border-gray-300">
         <thead className="bg-gray-200">
           <tr>
+            <th className="py-4 px-4">
+              <input type="checkbox" className="form-checkbox" />
+            </th>
             <th>Item ID</th>
             <th>Item Name</th>
             <th>Description</th>
@@ -57,7 +60,10 @@ const ItemTable: React.FC = () => {
               key={item.item_id}
               className="border border-gray-400 text-center"
             >
-              <td className="py-4">{item.item_id}</td>
+              <td className="py-4">
+                <input type="checkbox" className="form-checkbox" />
+              </td>
+              <td>{item.item_id}</td>
               <td>{item.item_name}</td>
               <td>{item.description}</td>
               <td>{item.sku}</td>
