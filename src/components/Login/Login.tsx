@@ -6,17 +6,14 @@ import { useFormHelper } from "@/hooks/useFormHelper";
 import Image from "next/image";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useAuth } from "../../hooks/useAuth";
 import { Controller } from "react-hook-form";
+import { useLogin } from "./useLogin";
+import { useToggle } from "@/hooks/useToggle";
 
 export default function Login() {
   const { bindInput } = useFormHelper<LoginSchemaType>();
-  const { loginControl, handleLoginSubmit, showPassword, toggleShowPassword } =
-    useAuth();
-
-  const onSubmit = (data: LoginSchemaType) => {
-    console.log(data);
-  };
+  const { showPassword, toggleShowPassword } = useToggle();
+  const { loginControl, onSubmit, handleLoginSubmit } = useLogin();
 
   return (
     <div className="min-h-screen w-full bg-gray-50 flex items-center justify-center p-4">
@@ -56,10 +53,7 @@ export default function Login() {
                 />
               </div>
               <div className="mb-5 relative">
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
+                <label className="block mb-2 text-sm font-medium text-gray-900">
                   Password
                 </label>
                 <Controller
@@ -69,6 +63,7 @@ export default function Login() {
                     <div>
                       <input
                         id="password"
+                        type={showPassword ? "text" : "password"}
                         {...bindInput(field, fieldState)}
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-400 block w-full p-2.5"
                         placeholder="password"
@@ -94,7 +89,6 @@ export default function Login() {
                   <input
                     type="checkbox"
                     className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-3 focus:ring-blue-300"
-                    required
                   />
                 </div>
                 <label className="ms-2 text-sm font-medium text-gray-900">
@@ -102,6 +96,7 @@ export default function Login() {
                 </label>
               </div>
               <button
+                onClick={onSubmit}
                 type="submit"
                 className="ms-2 text-sm sm:text-sm lg:text-lg font-bold text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg w-full sm:w-full px-5 py-2 text-center"
               >
@@ -128,6 +123,7 @@ export default function Login() {
                 alt="login"
                 width={500}
                 height={500}
+                priority
               />
             </div>
           </div>
