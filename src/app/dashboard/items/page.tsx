@@ -1,6 +1,6 @@
 import React from "react";
 import ItemTable from "@/components/Items";
-import Header from "@/components/ItemHeader";
+import Header from "@/components/Header";
 import ItemSearchBar from "@/components/ItemSearchBar";
 
 const Page = () => {
