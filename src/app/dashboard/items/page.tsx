@@ -7,7 +7,7 @@ const Page = () => {
   return (
     <div>
       <h1>Inventory Items</h1>
-      <Header title="Items" />
+      <Header title="Items" button_name="Add Item" />
       <ItemSearchBar />
       <ItemTable />
     </div>
