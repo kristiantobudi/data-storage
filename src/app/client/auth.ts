@@ -1,21 +1,10 @@
+import { LoginDataProps } from "@/types/LoginType"
+import { RegisterDataProps } from "@/types/RegisterType"
 import { getCookies } from "@/utils/cookies"
-import { axiosIntance, UserEndpoint } from "@/utils/network"
-
-export type LoginDataProps = {
-    username: string
-    password: string
-}
-
-export type RegisterDataProps = {
-    firstName: string
-    lastName: string
-    username: string
-    password: string
-    confirmPassword: string
-}
+import { axiosIntance, LoginEndpoint, LogoutEndpoint, RegisterEndpoint } from "@/utils/network"
 
 export const login = async (data: LoginDataProps) => {
-    return axiosIntance.post(UserEndpoint, data, {
+    return axiosIntance.post(LoginEndpoint, data, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -23,7 +12,7 @@ export const login = async (data: LoginDataProps) => {
 }
 
 export const register = async (data: RegisterDataProps) => {
-    return axiosIntance.post(`${UserEndpoint}/register/:id`, data, {
+    return axiosIntance.post(RegisterEndpoint, data, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -33,7 +22,7 @@ export const register = async (data: RegisterDataProps) => {
 export const logout = async () => {
     const auth = await getCookies('Authorization')
     return axiosIntance.post(
-        UserEndpoint,
+        LogoutEndpoint,
         {},
         {
             headers: {
