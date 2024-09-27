@@ -39,8 +39,8 @@ const SidebarItem = ({ item, pageName, setPageName }: SidebarItemProps) => {
         href={item.route}
         onClick={handleClick}
         className={`${
-          isItemActive ? "text-white" : ""
-        } group relative flex items-center gap-2 rounded-sm px-4 py-2 font-medium text-gray-400 duration-300 ease-in-out hover:text-white`}
+          isItemActive ? "bg-[#DBE2EF] text-[#F9F7F7]" : ""
+        } group relative flex items-center gap-2 px-4 py-2 font-medium text-gray-800 duration-300 ease-in-out hover:text-white hover:bg-[#3F72AF] rounded-lg`}
       >
         {item.svg}
         {item.label}

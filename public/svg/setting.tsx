@@ -3,9 +3,10 @@ export const SettingIcon: React.FC = () => {
     <svg
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"
-      width="512.000000pt"
-      height="512.000000pt"
+      width="18pt"
+      height="18pt"
       viewBox="0 0 512.000000 512.000000"
+      className="fill-current"
       preserveAspectRatio="xMidYMid meet"
     >
       <g

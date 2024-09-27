@@ -41,12 +41,6 @@ export const MenuSidebar: MenuGroupType = {
       label: "Inventory",
     },
     {
-      name: "Settings",
-      route: "/dashboard/settings",
-      svg: <SettingIcon />,
-      label: "Settings",
-    },
-    {
       name: "Transactions",
       route: "/dashboard/transactions",
       svg: <TransactionIcon />,
@@ -57,6 +51,12 @@ export const MenuSidebar: MenuGroupType = {
       route: "/dashboard/storage",
       svg: <StorageIcon />,
       label: "Storage",
+    },
+    {
+      name: "Settings",
+      route: "/dashboard/settings",
+      svg: <SettingIcon />,
+      label: "Settings",
     },
   ],
 };
