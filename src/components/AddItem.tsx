@@ -18,7 +18,7 @@ const AddItem: React.FC<AddItemProps> = ({ closeModal }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded shadow-lg">
+      <div className="bg-white p-12 w-1/2 rounded shadow-lg">
         <h2 className="text-2xl font-bold mb-4 text-black">Add New Item</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
