@@ -48,7 +48,7 @@ const Page: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <h1>Inventory Items</h1>
       <Header
         title="Items"
