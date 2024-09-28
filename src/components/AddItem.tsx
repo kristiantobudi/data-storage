@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 interface AddItemProps {
   closeModal: () => void;
+  addItem: (newItem: any) => void;
 }
 
-const AddItem: React.FC<AddItemProps> = ({ closeModal }) => {
+const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
   const [itemName, setItemName] = useState("");
   const [itemDesc, setItemDesc] = useState("");
   const [itemSKU, setItemSKU] = useState("");
@@ -13,6 +14,21 @@ const AddItem: React.FC<AddItemProps> = ({ closeModal }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newItem = {
+      item_name: itemName,
+      description: itemDesc,
+      sku: itemSKU,
+      qty: itemQuantity,
+      category_id: Number(itemCatId),
+    };
+
+    addItem(newItem);
+    setItemName("");
+    setItemDesc("");
+    setItemSKU("");
+    setItemQuantity(0);
+    setItemCatId("");
     closeModal();
   };
 
