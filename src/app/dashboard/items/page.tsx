@@ -44,12 +44,8 @@ const Page: React.FC = () => {
     },
   ]);
 
-  const [lastItemId, setLastItemId] = useState(3);
-
-  const addItem = (newItem: Omit<Item, "item_id">) => {
-    const newItemWithId = { ...newItem, item_id: lastItemId + 1 };
-    setItems((prevItems) => [...prevItems, newItemWithId]);
-    setLastItemId(lastItemId + 1);
+  const addItem = (newItem: Item) => {
+    setItems((prevItems) => [...prevItems, newItem]);
   };
 
   const closeModal = () => {

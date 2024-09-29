@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 
 interface Item {
@@ -11,7 +12,7 @@ interface Item {
 
 interface AddItemProps {
   closeModal: () => void;
-  addItem: (newItem: Omit<Item, "item_id">) => void;
+  addItem: (newItem: Item) => void;
 }
 
 const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
@@ -20,11 +21,13 @@ const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
   const [itemSKU, setItemSKU] = useState("");
   const [itemQuantity, setItemQuantity] = useState(0);
   const [itemCatId, setItemCatId] = useState("");
+  const [lastItemId, setLastItemId] = useState(3); // Initialize with last known ID
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newItem: Omit<Item, "item_id"> = {
+    const newItem: Item = {
+      item_id: lastItemId + 1,
       item_name: itemName,
       description: itemDesc,
       sku: itemSKU,
@@ -33,6 +36,7 @@ const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
     };
 
     addItem(newItem);
+    setLastItemId(lastItemId + 1);
     setItemName("");
     setItemDesc("");
     setItemSKU("");
