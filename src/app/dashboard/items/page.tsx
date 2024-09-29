@@ -14,7 +14,7 @@ interface Item {
   category_id: number;
 }
 
-const Page: React.FC<Item> = () => {
+const Page: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [items, setItems] = useState([
@@ -46,7 +46,7 @@ const Page: React.FC<Item> = () => {
 
   const [lastItemId, setLastItemId] = useState(3);
 
-  const addItem = (newItem: any) => {
+  const addItem = (newItem: Omit<Item, "item_id">) => {
     const newItemWithId = { ...newItem, item_id: lastItemId + 1 };
     setItems((prevItems) => [...prevItems, newItemWithId]);
     setLastItemId(lastItemId + 1);

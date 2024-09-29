@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 
+interface Item {
+  item_id: number;
+  item_name: string;
+  description: string;
+  sku: string;
+  qty: number;
+  category_id: number;
+}
+
 interface AddItemProps {
   closeModal: () => void;
-  addItem: (newItem: any) => void;
+  addItem: (newItem: Omit<Item, "item_id">) => void;
 }
 
 const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
@@ -15,7 +24,7 @@ const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newItem = {
+    const newItem: Omit<Item, "item_id"> = {
       item_name: itemName,
       description: itemDesc,
       sku: itemSKU,
