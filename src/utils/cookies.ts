@@ -20,7 +20,7 @@ export const deleteCookies = async (key: string) => {
 
 export const deleteAuth = async () => {
     cookies().delete('Authorization')
-    redirect('/login')
+    redirect('/auth/login')
 }
 
 export const resetCookies = () => {
