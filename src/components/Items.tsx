@@ -28,6 +28,7 @@ const ItemTable: React.FC<ItemTableProps> = ({ items }) => {
             <th>SKU</th>
             <th>Quantity</th>
             <th>Category ID</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -45,6 +46,14 @@ const ItemTable: React.FC<ItemTableProps> = ({ items }) => {
               <td>{item.sku}</td>
               <td>{item.qty}</td>
               <td>{item.category_id}</td>
+              <td className="flex justify-center space-x-2 py-2">
+                <button className="bg-purple-700 text-white rounded p-2 transition-all hover:bg-purple-500 hover:text-indigo-900">
+                  Edit
+                </button>
+                <button className="bg-red-600 text-white rounded p-2 transition-all hover:bg-red-400 hover:text-indigo-900">
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

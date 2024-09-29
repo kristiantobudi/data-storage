@@ -5,7 +5,16 @@ import Header from "@/components/Header";
 import SearchBar from "@/components/SearchBar";
 import AddItem from "@/components/AddItem";
 
-const Page: React.FC = () => {
+interface Item {
+  item_id: number;
+  item_name: string;
+  description: string;
+  sku: string;
+  qty: number;
+  category_id: number;
+}
+
+const Page: React.FC<Item> = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [items, setItems] = useState([
@@ -35,7 +44,7 @@ const Page: React.FC = () => {
     },
   ]);
 
-  const [lastItemId, setLastItemId] = useState(3); // Initial item_id set to 3 (the last existing ID)
+  const [lastItemId, setLastItemId] = useState(3);
 
   const addItem = (newItem: any) => {
     const newItemWithId = { ...newItem, item_id: lastItemId + 1 };
