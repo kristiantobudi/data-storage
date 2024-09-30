@@ -13,17 +13,17 @@ export default function Header(props: {
   };
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white shadow-sm">
-      <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
+      <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-lg md:px-6 xl:px-11">
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
           <button
             onClick={onClickPagination}
             className="z-99999 block rounded-sm border bg-white p-2 shadow-sm lg:hidden"
             aria-controls="sidebar"
           >
-            <span className="relative block h-5.5 w-5.5 cursor-pointer">
+            <span className="relative block h-5 w-5 cursor-pointer">
               <span className="du-block absolute right-0 h-full w-full">
                 <span
-                  className={`relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white ${
+                  className={`relative left-0 top-0 my-1 block h-1 w-1 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white ${
                     !props.sidebarOpen && "!w-full delay-300"
                   }`}
                 ></span>
@@ -45,7 +45,7 @@ export default function Header(props: {
                   }`}
                 ></span>
                 <span
-                  className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white ${
+                  className={`delay-400 absolute left-0 top-2 block h-1 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white ${
                     !props.sidebarOpen && "!h-0 !delay-200"
                   }`}
                 ></span>
