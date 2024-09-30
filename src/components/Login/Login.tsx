@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import { LoginSchemaType } from "@/app/schema/loginSchema";
+import { LoginSchemaType } from "@/schema/loginSchema";
 import { useFormHelper } from "@/hooks/useFormHelper";
 import Image from "next/image";
 import Link from "next/link";

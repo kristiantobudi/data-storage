@@ -1,5 +1,5 @@
 import { register } from "@/app/client/auth";
-import { RegisterSchema, RegisterSchemaType } from "@/app/schema/registerSchema";
+import { RegisterSchema, RegisterSchemaType } from "@/schema/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { storeToken } from "@/utils"

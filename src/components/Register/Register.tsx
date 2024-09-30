@@ -1,6 +1,6 @@
 "use client";
 
-import { RegisterSchemaType } from "@/app/schema/registerSchema";
+import { RegisterSchemaType } from "@/schema/registerSchema";
 import Image from "next/image";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";

@@ -1,5 +1,5 @@
 import { login } from "@/app/client/auth"
-import { LoginSchema, LoginSchemaType } from "@/app/schema/loginSchema"
+import { LoginSchema, LoginSchemaType } from "@/schema/loginSchema"
 import { storeToken } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
