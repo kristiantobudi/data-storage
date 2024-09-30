@@ -1,68 +1,27 @@
 "use client";
-import React, { useState } from "react";
 import ItemTable from "@/components/Items";
-import Header from "@/components/Header";
+import Header from "@/components/Header/Header";
 import SearchBar from "@/components/SearchBar";
-import AddItem from "@/components/AddItem";
-
-interface Item {
-  item_id: number;
-  item_name: string;
-  description: string;
-  sku: string;
-  qty: number;
-  category_id: number;
-}
+import AddItem from "@/components/Header/AddItem";
+import { useModal } from "@/components/Header/useHeader";
 
 const Page: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const [items, setItems] = useState([
-    {
-      item_id: 1,
-      item_name: "Product A",
-      description: "Description of Product A",
-      sku: "SKU001",
-      qty: 100,
-      category_id: 101,
-    },
-    {
-      item_id: 2,
-      item_name: "Product B",
-      description: "Description of Product B",
-      sku: "SKU002",
-      qty: 150,
-      category_id: 102,
-    },
-    {
-      item_id: 3,
-      item_name: "Product C",
-      description: "Description of Product C",
-      sku: "SKU003",
-      qty: 200,
-      category_id: 103,
-    },
-  ]);
-
-  const addItem = (newItem: Item) => {
-    setItems((prevItems) => [...prevItems, newItem]);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const { items, addItem, isModalOpen, closeModal, openModal } = useModal();
+  const lastItemId = items.length > 0 ? items[items.length - 1].item_id : 0;
 
   return (
     <div className="flex flex-col min-h-screen">
       <h1>Inventory Items</h1>
-      <Header
-        title="Items"
-        button_name="Add Item"
-        onClick={() => setIsModalOpen(true)}
-      />
+      <Header title="Items" button_name="Add Item" openModal={openModal} />
       <SearchBar placeholder="Search item ID.." isStockPage={false} />
       <ItemTable items={items} />
-      {isModalOpen && <AddItem closeModal={closeModal} addItem={addItem} />}
+      {isModalOpen && (
+        <AddItem
+          closeModal={closeModal}
+          addItem={addItem}
+          lastItemId={lastItemId}
+        />
+      )}
     </div>
   );
 };

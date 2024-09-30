@@ -13,15 +13,19 @@ interface Item {
 interface AddItemProps {
   closeModal: () => void;
   addItem: (newItem: Item) => void;
+  lastItemId: number;
 }
 
-const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
+const AddItem: React.FC<AddItemProps> = ({
+  closeModal,
+  addItem,
+  lastItemId,
+}) => {
   const [itemName, setItemName] = useState("");
   const [itemDesc, setItemDesc] = useState("");
   const [itemSKU, setItemSKU] = useState("");
   const [itemQuantity, setItemQuantity] = useState(0);
   const [itemCatId, setItemCatId] = useState("");
-  const [lastItemId, setLastItemId] = useState(3); // Initialize with last known ID
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +40,6 @@ const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
     };
 
     addItem(newItem);
-    setLastItemId(lastItemId + 1);
     setItemName("");
     setItemDesc("");
     setItemSKU("");
