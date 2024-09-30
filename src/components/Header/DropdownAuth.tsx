@@ -58,7 +58,7 @@ export default function DropdownAuth() {
           className={`absolute right-0 mt-4 flex w-60 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark`}
         >
           <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7 dark:border-strokedark">
-            <li>
+            <li className="flex items-center gap-3">
               <Link
                 href="/profile"
                 className="flex items-center gap-3 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
@@ -83,7 +83,7 @@ export default function DropdownAuth() {
                 My Profile
               </Link>
             </li>
-            <li>
+            <li className="flex items-center gap-3">
               <Link
                 href="#"
                 className="flex items-center gap-3 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
@@ -104,7 +104,7 @@ export default function DropdownAuth() {
                 My Contacts
               </Link>
             </li>
-            <li>
+            <li className="flex items-center gap-3">
               <Link
                 href="/settings"
                 className="flex items-center gap-3 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"

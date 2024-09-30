@@ -5,7 +5,9 @@ import { redirect } from "next/navigation";
 
 export const storeToken = async (token: string ) => {
     cookies().set('Authorization', token, {
-        secure: true 
+        secure: true,
+        httpOnly: true,
+        sameSite: 'strict',
     })
     redirect('/dashboard');
 }
@@ -18,16 +20,13 @@ export const deleteCookies = async (key: string) => {
     cookies().delete(key)
 }
 
-export const deleteAuth = async () => {
-    cookies().delete('Authorization')
-    redirect('/auth/login')
-}
+export const deleteAuth = () => {
+    cookies().delete('Authorization');
+    redirect('/auth/login');
+};
 
 export const resetCookies = () => {
-    cookies()
-    .getAll()
-    .forEach(cookie => {
-        deleteCookies(cookie.name)
-    })
-    redirect('/')
+    const cookieStore = cookies();
+    cookieStore.getAll().forEach(cookie => deleteCookies(cookie.name));
+    redirect('/auth/login');
 }

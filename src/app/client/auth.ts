@@ -1,6 +1,6 @@
 import { LoginDataProps } from "@/types/LoginType"
 import { RegisterDataProps } from "@/types/RegisterType"
-import { getCookies } from "@/utils/cookies"
+import { deleteCookies } from "@/utils/cookies"
 import { axiosIntance, LoginEndpoint, LogoutEndpoint, RegisterEndpoint } from "@/utils/network"
 
 export const login = async (data: LoginDataProps) => {
@@ -20,15 +20,17 @@ export const register = async (data: RegisterDataProps) => {
 }
 
 export const logout = async () => {
-    const auth = await getCookies('Authorization')
+    const auth = await deleteCookies('Authorization')
     return axiosIntance.post(
         LogoutEndpoint,
         {},
         {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': auth
+                'Authorization': `Bearer ${auth}`
             }
         }
-    )
+    ).catch(error => {
+        console.error(error)
+    })
 }

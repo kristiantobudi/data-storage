@@ -5,7 +5,7 @@ export const useLogout = () => {
     const onLogout = async () => {
         try {
             const response = await logout();
-            if (response.status === 204) {
+            if (response && response.status === 204) {
                 await deleteAuth();
             }
         } catch (error) {
