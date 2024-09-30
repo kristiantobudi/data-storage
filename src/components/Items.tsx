@@ -9,37 +9,13 @@ interface Item {
   category_id: number;
 }
 
-// Data dummy
-const items: Item[] = [
-  {
-    item_id: 1,
-    item_name: "Product A",
-    description: "Description of Product A",
-    sku: "SKU001",
-    qty: 100,
-    category_id: 101,
-  },
-  {
-    item_id: 2,
-    item_name: "Product B",
-    description: "Description of Product B",
-    sku: "SKU002",
-    qty: 150,
-    category_id: 102,
-  },
-  {
-    item_id: 3,
-    item_name: "Product C",
-    description: "Description of Product C",
-    sku: "SKU003",
-    qty: 200,
-    category_id: 103,
-  },
-];
+interface ItemTableProps {
+  items: Item[];
+}
 
-const ItemTable: React.FC = () => {
+const ItemTable: React.FC<ItemTableProps> = ({ items }) => {
   return (
-    <div className="w-full bg-white text-purple-950">
+    <div className="flex-grow w-full bg-white text-purple-950">
       <table className="w-full border-collapse border border-gray-300">
         <thead className="bg-gray-200">
           <tr>
@@ -52,6 +28,7 @@ const ItemTable: React.FC = () => {
             <th>SKU</th>
             <th>Quantity</th>
             <th>Category ID</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -69,6 +46,14 @@ const ItemTable: React.FC = () => {
               <td>{item.sku}</td>
               <td>{item.qty}</td>
               <td>{item.category_id}</td>
+              <td className="flex justify-center space-x-2 py-2">
+                <button className="bg-purple-700 text-white rounded p-2 transition-all hover:bg-purple-500 hover:text-indigo-900">
+                  Edit
+                </button>
+                <button className="bg-red-600 text-white rounded p-2 transition-all hover:bg-red-400 hover:text-indigo-900">
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
