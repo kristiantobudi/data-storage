@@ -1,4 +1,4 @@
-import { logout } from "@/app/client";
+import { logout } from "@/client";
 import { deleteAuth } from "@/utils";
 
 export const useLogout = () => {

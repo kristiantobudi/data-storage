@@ -1,4 +1,5 @@
-import { login } from "@/app/client/auth"
+
+import { login } from "@/client"
 import { LoginSchema, LoginSchemaType } from "@/schema/loginSchema"
 import { storeToken } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
