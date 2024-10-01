@@ -1,4 +1,56 @@
+import React, { useState } from "react";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import { ApexOptions } from "apexcharts";
+
+const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
+
 export default function ChartOne() {
+  const [chartOptions] = useState<ApexOptions>({
+    chart: {
+      type: "bar",
+      height: 320,
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: "70%",
+        borderRadiusApplication: "end",
+        borderRadius: 8,
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      show: true,
+      width: 0,
+      colors: ["transparent"],
+    },
+    xaxis: {
+      categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    },
+    fill: {
+      opacity: 1,
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+    },
+    colors: ["#1A56DB", "#FDBA8C"],
+  });
+
+  const [series] = useState([
+    {
+      name: "Organic",
+      data: [231, 122, 63, 421, 122, 323, 111],
+    },
+    {
+      name: "Social media",
+      data: [232, 113, 341, 224, 522, 411, 243],
+    },
+  ]);
+
   return (
     <>
       <div className="max-w-sm w-full bg-white rounded-lg shadow p-4 md:p-6">
@@ -35,9 +87,9 @@ export default function ChartOne() {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M5 13V1m0 0L1 5m4-4 4 4"
               />
             </svg>
@@ -47,10 +99,12 @@ export default function ChartOne() {
       </div>
       <div className="grid grid-cols-2">
         <dl className="flex items-center">
-          <dt className="text-gray-500 text-sm font-normal me-1">
+          <dt className="text-gray-500 text-sm font-normal me-1 mt-2">
             Money spent
           </dt>
-          <dd className="text-gray-900 text-sm font-semibold">Money spent</dd>
+          <dd className="text-gray-900 text-sm font-semibold mt-2">
+            Money spent
+          </dd>
         </dl>
         <dl className="flex items-center justify-end">
           <dt className="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">
@@ -61,7 +115,14 @@ export default function ChartOne() {
           </dd>
         </dl>
       </div>
-      <div id="column-chart"></div>
+      <div id="column-chart">
+        <ApexChart
+          options={chartOptions}
+          series={series}
+          type="bar"
+          height={320}
+        />
+      </div>
       <div className="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
         <div className="flex justify-between items-center pt-5">
           <button
@@ -81,9 +142,9 @@ export default function ChartOne() {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="m1 1 4 4 4-4"
               />
             </svg>
@@ -97,12 +158,12 @@ export default function ChartOne() {
               aria-labelledby="dropdownDefaultButton"
             >
               <li>
-                <a
+                <Link
                   href="#"
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   Yesterday
-                </a>
+                </Link>
               </li>
               <li>
                 <a
@@ -138,7 +199,7 @@ export default function ChartOne() {
               </li>
             </ul>
           </div>
-          <a
+          <Link
             href="#"
             className="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2"
           >
@@ -152,13 +213,13 @@ export default function ChartOne() {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="m1 9 4-4-4-4"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </>

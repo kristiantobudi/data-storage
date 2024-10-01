@@ -35,10 +35,10 @@ export const MenuSidebar: MenuGroupType = {
       label: "Items",
     },
     {
-      name: "Inventory",
-      route: "/dashboard/inventory",
+      name: "Stocks",
+      route: "/dashboard/stocks",
       svg: <InventoryIcon />,
-      label: "Inventory",
+      label: "Stock",
     },
     {
       name: "Transactions",
