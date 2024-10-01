@@ -1,15 +1,11 @@
-import { useState } from "react";
 import ClickOutside from "../ClickOutside";
 import Link from "next/link";
+import { useNavbar } from "./settings/useNavbar";
 
 export default function DropdownNotifiation() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [notifying, setNotifying] = useState(true);
-  const onClickOutside = () => setDropdownOpen(false);
-  const onClickNotifying = () => {
-    setNotifying(false);
-    setDropdownOpen(!dropdownOpen);
-  };
+  const { onClickOutside, onClickNotifying, notifying, dropdownOpen } =
+    useNavbar();
+
   return (
     <ClickOutside onClick={onClickOutside} className="relative">
       <li>

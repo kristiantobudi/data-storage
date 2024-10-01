@@ -1,4 +1,4 @@
-export const ItemEndpoint = 'api/v1/item'
+export const ItemEndpoint = 'api/v1/items'
 export const CategoryEndpoint = 'api/v1/categories'
 export const UserEndpoint = 'api/v1/users'
 export const LoginEndpoint = 'api/v1/auth/login'

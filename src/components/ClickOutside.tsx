@@ -1,13 +1,7 @@
 import React, { useRef, useEffect } from "react";
+import { ClickOutsideType } from "@/types/ClickOutsideType";
 
-interface Props {
-  children: React.ReactNode;
-  exceptionRef?: React.RefObject<HTMLElement>;
-  onClick: () => void;
-  className?: string;
-}
-
-const ClickOutside: React.FC<Props> = ({
+const ClickOutside: React.FC<ClickOutsideType> = ({
   children,
   exceptionRef,
   onClick,
@@ -17,21 +11,12 @@ const ClickOutside: React.FC<Props> = ({
 
   useEffect(() => {
     const handleClickListener = (event: MouseEvent) => {
-      let clickedInside: null | boolean = false;
-      if (exceptionRef) {
-        clickedInside =
-          (wrapperRef.current &&
-            wrapperRef.current.contains(event.target as Node)) ||
-          (exceptionRef.current && exceptionRef.current === event.target) ||
-          (exceptionRef.current &&
-            exceptionRef.current.contains(event.target as Node));
-      } else {
-        clickedInside =
-          wrapperRef.current &&
-          wrapperRef.current.contains(event.target as Node);
-      }
+      const isInside =
+        wrapperRef.current?.contains(event.target as Node) ?? false;
+      const isException =
+        exceptionRef?.current?.contains(event.target as Node) ?? false;
 
-      if (!clickedInside) onClick();
+      if (!isInside && !isException) onClick();
     };
 
     document.addEventListener("mousedown", handleClickListener);

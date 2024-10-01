@@ -1,14 +1,11 @@
-import { useState } from "react";
 import ClickOutside from "../ClickOutside";
 import Link from "next/link";
 import Image from "next/image";
 import { useLogout } from "@/hooks/useLogout";
+import { useNavbar } from "./settings/useNavbar";
 
 export default function DropdownAuth() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const onClickOutside = () => setDropdownOpen(false);
-  const onClickDropdown = () => setDropdownOpen(!dropdownOpen);
-  const { onLogout } = useLogout();
+  const { onClickDropdown, onClickOutside, dropdownOpen } = useNavbar();
 
   return (
     <ClickOutside onClick={onClickOutside} className="relative">
@@ -131,7 +128,7 @@ export default function DropdownAuth() {
             </li>
           </ul>
           <button
-            onClick={onLogout}
+            onClick={useLogout}
             className="flex items-center gap-3 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
           >
             <svg
