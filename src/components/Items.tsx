@@ -1,4 +1,6 @@
 import React from "react";
+import DeleteButton from "./Button/Delete";
+import { useButton } from "./Button/useButton";
 
 interface Item {
   item_id: number;
@@ -14,6 +16,8 @@ interface ItemTableProps {
 }
 
 const ItemTable: React.FC<ItemTableProps> = ({ items }) => {
+  const { handleDelete } = useButton();
+
   return (
     <div className="flex-grow w-full bg-white text-purple-950">
       <table className="w-full border-collapse border border-gray-300">
@@ -50,9 +54,7 @@ const ItemTable: React.FC<ItemTableProps> = ({ items }) => {
                 <button className="bg-purple-700 text-white rounded p-2 transition-all hover:bg-purple-500 hover:text-indigo-900">
                   Edit
                 </button>
-                <button className="bg-red-600 text-white rounded p-2 transition-all hover:bg-red-400 hover:text-indigo-900">
-                  Delete
-                </button>
+                <DeleteButton item={item} onDelete={handleDelete} />{" "}
               </td>
             </tr>
           ))}
