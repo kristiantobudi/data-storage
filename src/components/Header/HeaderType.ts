@@ -1,10 +1,10 @@
 export type Item = {
-    item_id: number;
+    item_id:string;
     item_name: string;
-    description: string;
     sku: string;
-    qty: number;
-    category_id: number;
+    quantity: number;
+    category: string;
+    storage_location: string;
   }
 
   export type HeaderProps = {

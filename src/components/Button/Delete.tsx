@@ -2,13 +2,13 @@
 import { useState } from "react";
 
 interface Item {
-  item_id: number;
+  item_id: string;
   item_name: string;
 }
 
 interface DeleteButtonProps {
   item: Item;
-  onDelete: (item_id: number) => void;
+  onDelete: (item_id: string) => void;
 }
 
 export default function DeleteButton({ item, onDelete }: DeleteButtonProps) {

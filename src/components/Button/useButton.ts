@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 interface Item {
-  item_id: number;
+  item_id: string;
   item_name: string;
-  description: string;
   sku: string;
-  qty: number;
-  category_id: number;
+  quantity: number;
+  category: string;
+  storage_location: string;
 }
 
 export const useButton = () => {
@@ -14,10 +14,24 @@ export const useButton = () => {
   const [modal, setModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
 
-  const handleDelete = (item_id: number) => {
-    setItems((prevItems) => prevItems.filter((item) => item.item_id !== item_id));
-    setModal(false); 
+ // Fungsi untuk mengirim permintaan DELETE
+  const handleDelete = async (item_id: string) => {
+    try {
+      const response = await fetch(`/api/v1/items/${item_id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete item.");
+      }
+
+      // Update state jika berhasil
+      setItems((prevItems) => prevItems.filter((item) => item.item_id !== item_id));
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
   };
+
 
   const toggleModal = (item: Item | null) => {
     setSelectedItem(item);
