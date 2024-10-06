@@ -1,51 +1,69 @@
 "use client";
 import React, { useState } from "react";
 
-interface Item {
-  item_id: number;
+interface NewItem {
   item_name: string;
-  description: string;
   sku: string;
-  qty: number;
-  category_id: number;
+  quantity: number;
+  category: string;
+  storage_location: string;
+}
+
+interface Item extends NewItem {
+  item_id: string;
 }
 
 interface AddItemProps {
   closeModal: () => void;
   addItem: (newItem: Item) => void;
-  lastItemId: number;
 }
 
-const AddItem: React.FC<AddItemProps> = ({
-  closeModal,
-  addItem,
-  lastItemId,
-}) => {
+const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
   const [itemName, setItemName] = useState("");
-  const [itemDesc, setItemDesc] = useState("");
   const [itemSKU, setItemSKU] = useState("");
   const [itemQuantity, setItemQuantity] = useState(0);
-  const [itemCatId, setItemCatId] = useState("");
+  const [itemCategory, setItemCategory] = useState("");
+  const [itemStorage, setItemStorage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const newItem: Item = {
-      item_id: lastItemId + 1,
+    const newItem: NewItem = {
       item_name: itemName,
-      description: itemDesc,
       sku: itemSKU,
-      qty: itemQuantity,
-      category_id: Number(itemCatId),
+      quantity: itemQuantity,
+      category: itemCategory,
+      storage_location: itemStorage,
     };
 
-    addItem(newItem);
-    setItemName("");
-    setItemDesc("");
-    setItemSKU("");
-    setItemQuantity(0);
-    setItemCatId("");
-    closeModal();
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/v1/items`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newItem),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to add new item");
+      }
+
+      const result: Item = await response.json();
+
+      addItem(result);
+
+      setItemName("");
+      setItemStorage("");
+      setItemSKU("");
+      setItemQuantity(0);
+      setItemCategory("");
+      closeModal();
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -61,18 +79,6 @@ const AddItem: React.FC<AddItemProps> = ({
               type="text"
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
-              className="mt-1 p-2 border rounded w-full text-black"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Item Description
-            </label>
-            <input
-              type="text"
-              value={itemDesc}
-              onChange={(e) => setItemDesc(e.target.value)}
               className="mt-1 p-2 border rounded w-full text-black"
               required
             />
@@ -103,12 +109,24 @@ const AddItem: React.FC<AddItemProps> = ({
           </div>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Category ID
+              Category
             </label>
             <input
-              type="number"
-              value={itemCatId}
-              onChange={(e) => setItemCatId(e.target.value)}
+              type="text"
+              value={itemCategory}
+              onChange={(e) => setItemCategory(e.target.value)}
+              className="mt-1 p-2 border rounded w-full text-black"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Storage
+            </label>
+            <input
+              type="text"
+              value={itemStorage}
+              onChange={(e) => setItemStorage(e.target.value)}
               className="mt-1 p-2 border rounded w-full text-black"
               required
             />

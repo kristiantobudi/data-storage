@@ -8,7 +8,6 @@ import DefaultLayouts from "@/components/Layouts/DefaultLayouts";
 
 const ItemPage: React.FC = () => {
   const { items, addItem, isModalOpen, closeModal, openModal } = useModal();
-  const lastItemId = items.length > 0 ? items[items.length - 1].item_id : 0;
 
   return (
     <DefaultLayouts>
@@ -20,7 +19,6 @@ const ItemPage: React.FC = () => {
           <AddItem
             closeModal={closeModal}
             addItem={addItem}
-            lastItemId={lastItemId}
           />
         )}
       </div>
