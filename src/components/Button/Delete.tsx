@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 interface Item {
-  item_id: string;
+  item_id: string
   item_name: string;
 }
 
@@ -17,7 +17,7 @@ export default function DeleteButton({ item, onDelete }: DeleteButtonProps) {
 
   function handleDelete() {
     setIsMutating(true);
-    onDelete(item.item_id);
+    onDelete(item.item_name);
     setIsMutating(false);
     setModal(false);
   }

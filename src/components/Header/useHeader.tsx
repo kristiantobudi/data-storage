@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { Item } from "./HeaderType";
 import { useEffect } from "react";
-// import { DataItem } from "@/components/Header/constant";
 
 export const useModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

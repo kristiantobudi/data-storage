@@ -15,18 +15,18 @@ export const useButton = () => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
 
  // Fungsi untuk mengirim permintaan DELETE
-  const handleDelete = async (item_id: string) => {
+  const handleDelete = async (_id: string) => {
     try {
-      const response = await fetch(`/api/v1/items/${item_id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/v1/items/${_id}`, {
         method: "DELETE",
       });
-
+      console.log(response)
       if (!response.ok) {
         throw new Error("Failed to delete item.");
       }
 
       // Update state jika berhasil
-      setItems((prevItems) => prevItems.filter((item) => item.item_id !== item_id));
+      setItems((prevItems) => prevItems.filter((item) => item.item_id !== _id));
     } catch (error) {
       console.error("Error deleting item:", error);
     }

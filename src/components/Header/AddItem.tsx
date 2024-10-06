@@ -1,13 +1,16 @@
 "use client";
 import React, { useState } from "react";
 
-interface Item {
-  item_id: string;
+interface NewItem {
   item_name: string;
   sku: string;
   quantity: number;
   category: string;
   storage_location: string;
+}
+
+interface Item extends NewItem {
+  item_id: string;
 }
 
 interface AddItemProps {
@@ -16,7 +19,6 @@ interface AddItemProps {
 }
 
 const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
-  const [itemId, setItemId] = useState("");
   const [itemName, setItemName] = useState("");
   const [itemSKU, setItemSKU] = useState("");
   const [itemQuantity, setItemQuantity] = useState(0);
@@ -26,8 +28,8 @@ const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newItem: Item = {
-      item_id: itemId,
+    // Membuat objek `NewItem` tanpa `item_id`
+    const newItem: NewItem = {
       item_name: itemName,
       sku: itemSKU,
       quantity: itemQuantity,
@@ -36,6 +38,7 @@ const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
     };
 
     try {
+      // Kirim `newItem` ke API
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/v1/items`,
         {
@@ -51,10 +54,13 @@ const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
         throw new Error("Failed to add new item");
       }
 
-      const result = await response.json();
+      // Backend akan mengembalikan `Item` lengkap dengan `item_id`
+      const result: Item = await response.json();
 
+      // Tambahkan item dengan `item_id` dari backend
       addItem(result);
 
+      // Reset form
       setItemName("");
       setItemStorage("");
       setItemSKU("");

@@ -17,6 +17,7 @@ interface ItemTableProps {
 
 const ItemTable: React.FC<ItemTableProps> = ({ items }) => {
   const { handleDelete } = useButton();
+
   return (
     <div className="flex-grow w-full bg-white text-purple-950">
       <table className="w-full border-collapse border border-gray-300">
