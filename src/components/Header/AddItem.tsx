@@ -27,8 +27,6 @@ const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Membuat objek `NewItem` tanpa `item_id`
     const newItem: NewItem = {
       item_name: itemName,
       sku: itemSKU,
@@ -38,7 +36,6 @@ const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
     };
 
     try {
-      // Kirim `newItem` ke API
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/v1/items`,
         {
@@ -54,13 +51,10 @@ const AddItem: React.FC<AddItemProps> = ({ closeModal, addItem }) => {
         throw new Error("Failed to add new item");
       }
 
-      // Backend akan mengembalikan `Item` lengkap dengan `item_id`
       const result: Item = await response.json();
 
-      // Tambahkan item dengan `item_id` dari backend
       addItem(result);
 
-      // Reset form
       setItemName("");
       setItemStorage("");
       setItemSKU("");

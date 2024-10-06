@@ -14,7 +14,6 @@ export const useButton = () => {
   const [modal, setModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
 
- // Fungsi untuk mengirim permintaan DELETE
   const handleDelete = async (_id: string) => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/v1/items/${_id}`, {
@@ -25,7 +24,6 @@ export const useButton = () => {
         throw new Error("Failed to delete item.");
       }
 
-      // Update state jika berhasil
       setItems((prevItems) => prevItems.filter((item) => item.item_id !== _id));
     } catch (error) {
       console.error("Error deleting item:", error);

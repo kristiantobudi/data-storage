@@ -7,7 +7,6 @@ export const useModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [items, setItems] = useState<Item[]>([]);
 
-  // Fungsi untuk mendapatkan item dari API
   const fetchItems = async () => {
     try {
       const response = await fetch(
@@ -19,13 +18,12 @@ export const useModal = () => {
       const resData = await response.json();
       console.log("hasil data");
       console.log(resData);
-      setItems(resData.data); // Perbarui state dengan data terbaru dari API
+      setItems(resData.data);
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
-  // Panggil fetchItems ketika komponen pertama kali di-render
   useEffect(() => {
     fetchItems();
   }, []);
