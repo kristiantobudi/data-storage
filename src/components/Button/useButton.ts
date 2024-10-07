@@ -28,37 +28,17 @@ export const useButton = () => {
     }
   };
 
-  const handleUpdate = async (updatedItem: Item) => {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/v1/items/${updatedItem.item_id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedItem),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to update item.");
-      }
-      setItems((prevItems) =>
-        prevItems.map((item) => (item.item_id === updatedItem.item_id ? updatedItem : item))
-      );
-    } catch (error) {
-      console.error("Error updating item:", error);
-    }
-  };
-
   const toggleModal = (item: Item | null) => {
     setSelectedItem(item);
     setModal((prev) => !prev);
   };
 
-  return { 
+  return {
     handleDelete,
-    handleUpdate,
     toggleModal,
     modal,
     selectedItem,
     items,
+    setItems,
   };
 };

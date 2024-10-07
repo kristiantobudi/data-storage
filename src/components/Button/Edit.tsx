@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 
 interface Item {
-  item_id: string;
+  _id: string;
   item_name: string;
   sku: string;
   quantity: number;
@@ -20,11 +20,36 @@ export default function UpdateItem({ item, onUpdate }: UpdateButtonProps) {
   const [isMutating, setIsMutating] = useState(false);
   const [updatedItem, setUpdatedItem] = useState<Item>(item);
 
-  function handleUpdate() {
+  async function handleUpdate(e: SyntheticEvent) {
+    e.preventDefault();
     setIsMutating(true);
-    onUpdate(updatedItem);
-    setIsMutating(false);
-    setModal(false);
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/v1/items/${updatedItem._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            item_name: updatedItem.item_name,
+            sku: updatedItem.sku,
+            quantity: updatedItem.quantity,
+            category: updatedItem.category,
+            storage_location: updatedItem.storage_location,
+          }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update item.");
+      }
+      onUpdate(updatedItem);
+    } catch (error) {
+      console.error("Error updating item:", error);
+    } finally {
+      setIsMutating(false);
+      setModal(false);
+    }
   }
 
   function handleChange() {
@@ -120,7 +145,9 @@ export default function UpdateItem({ item, onUpdate }: UpdateButtonProps) {
                   Update
                 </button>
               ) : (
-                <button type="button">Updating...</button>
+                <button type="button" className="btn loading">
+                  Updating...
+                </button>
               )}
             </div>
           </div>
