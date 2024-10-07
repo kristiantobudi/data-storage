@@ -1,6 +1,7 @@
 import React from "react";
 import DeleteButton from "./Button/Delete";
 import { useButton } from "./Button/useButton";
+import UpdateItem from "./Button/Edit";
 
 interface Item {
   item_id: string;
@@ -16,7 +17,7 @@ interface ItemTableProps {
 }
 
 const ItemTable: React.FC<ItemTableProps> = ({ items }) => {
-  const { handleDelete } = useButton();
+  const { handleUpdate, handleDelete } = useButton();
 
   return (
     <div className="flex-grow w-full bg-white text-purple-950">
@@ -49,9 +50,10 @@ const ItemTable: React.FC<ItemTableProps> = ({ items }) => {
               <td>{item.category}</td>
               <td>{item.storage_location}</td>
               <td className="flex justify-center space-x-2 py-2">
-                <button className="bg-purple-700 text-white rounded p-2 transition-all hover:bg-purple-500 hover:text-indigo-900">
+                {/* <button className="bg-purple-700 text-white rounded p-2 transition-all hover:bg-purple-500 hover:text-indigo-900">
                   Edit
-                </button>
+                </button> */}
+                <UpdateItem item={item} onUpdate={handleUpdate} />
                 <DeleteButton item={item} onDelete={handleDelete} />
               </td>
             </tr>
