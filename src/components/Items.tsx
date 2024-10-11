@@ -225,12 +225,12 @@ const ItemTable: React.FC = () => {
                 type="button"
                 onClick={() =>
                   onEditItem(
-                    updatedItem?._id!,
-                    updatedItem?.item_name!,
-                    updatedItem?.sku!,
-                    updatedItem?.quantity!,
-                    updatedItem?.category!,
-                    updatedItem?.storage_location!
+                    updatedItem?._id ?? "",
+                    updatedItem?.item_name ?? "",
+                    updatedItem?.sku ?? "",
+                    updatedItem?.quantity ?? 0,
+                    updatedItem?.category ?? "",
+                    updatedItem?.storage_location ?? ""
                   )
                 }
                 className="bg-green-600 text-white rounded px-4 py-2 hover:bg-green-500 transition-all"
