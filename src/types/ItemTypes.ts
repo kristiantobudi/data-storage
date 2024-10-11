@@ -1,11 +1,11 @@
 export type ItemType = {
-    _id: number;
+    _id: string;
     item_name: string;
     description: string;
     sku: string;
     quantity: number;
-    category: number;
-    storage_location: number;
+    category: string;
+    storage_location: string;
     create_at: string;
     update_at: string;
 }
