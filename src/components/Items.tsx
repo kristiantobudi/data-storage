@@ -3,7 +3,11 @@ import DeleteButton from "./Button/Delete";
 import UpdateItem from "./Button/Edit";
 import { ItemType } from "@/types/ItemTypes";
 
-const ItemTable: React.FC = () => {
+interface ItemTableProps {
+  searchQuery: string;
+}
+
+const ItemTable: React.FC<ItemTableProps> = ({ searchQuery }) => {
   const [isShowModalEdit, setIsShowModalEdit] = useState(false);
   const [isShowModalDelete, setIsShowModalDelete] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ItemType>();
@@ -29,6 +33,10 @@ const ItemTable: React.FC = () => {
   useEffect(() => {
     fetchItems();
   }, []);
+
+  const filteredItems = items.filter((item) =>
+    item.item_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const onDeleteItem = async (item_id: string) => {
     try {
@@ -258,7 +266,7 @@ const ItemTable: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {items?.map((item) => (
+            {filteredItems?.map((item) => (
               <tr key={item._id} className="border border-gray-400 text-center">
                 <td className="py-4">
                   <input type="checkbox" className="form-checkbox" />
