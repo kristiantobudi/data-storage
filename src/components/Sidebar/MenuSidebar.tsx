@@ -5,7 +5,7 @@ import {
   SettingIcon,
   StorageIcon,
   TransactionIcon,
-} from "../../../public/svg";
+} from "../../svg";
 
 interface SidebarItemType {
   name: string;

@@ -1,3 +1,5 @@
+"use client";
+
 import ClickOutside from "../ClickOutside";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,6 +8,7 @@ import { useNavbar } from "./settings/useNavbar";
 
 export default function DropdownAuth() {
   const { onClickDropdown, onClickOutside, dropdownOpen } = useNavbar();
+  const { handleLogout } = useLogout();
 
   return (
     <ClickOutside onClick={onClickOutside} className="relative">
@@ -128,7 +131,7 @@ export default function DropdownAuth() {
             </li>
           </ul>
           <button
-            onClick={useLogout}
+            onClick={handleLogout}
             className="flex items-center gap-3 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
           >
             <svg
