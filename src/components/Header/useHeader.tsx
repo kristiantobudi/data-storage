@@ -16,8 +16,6 @@ export const useModal = () => {
         throw new Error("Failed to fetch items");
       }
       const resData = await response.json();
-      console.log("hasil data");
-      console.log(resData);
       setItems(resData.data);
     } catch (error) {
       console.error("Error:", error);

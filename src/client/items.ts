@@ -1,6 +1,5 @@
 import { axiosIntance, ItemEndpoint } from "@/utils/network"
 import { ItemData } from "./settings/ItemData"
-
 export const getAllItem = async () => {
     return axiosIntance.get(ItemEndpoint, {
         params: {
@@ -8,8 +7,6 @@ export const getAllItem = async () => {
         }
     })
 }
-
-
 export const getItemById = async (id: number) => {
     return axiosIntance.get(`${ItemEndpoint}/${id}`)
 }
