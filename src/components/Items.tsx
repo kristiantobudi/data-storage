@@ -5,9 +5,10 @@ import { ItemType } from "@/types/ItemTypes";
 
 interface ItemTableProps {
   searchQuery: string;
+  sortOrder: string;
 }
 
-const ItemTable: React.FC<ItemTableProps> = ({ searchQuery }) => {
+const ItemTable: React.FC<ItemTableProps> = ({ searchQuery, sortOrder }) => {
   const [isShowModalEdit, setIsShowModalEdit] = useState(false);
   const [isShowModalDelete, setIsShowModalDelete] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ItemType>();
@@ -34,9 +35,18 @@ const ItemTable: React.FC<ItemTableProps> = ({ searchQuery }) => {
     fetchItems();
   }, []);
 
-  const filteredItems = items.filter((item) =>
-    item.item_name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredItems = items
+    .filter((item) =>
+      item.item_name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.item_name.localeCompare(b.item_name);
+      } else if (sortOrder === "desc") {
+        return b.item_name.localeCompare(a.item_name);
+      }
+      return 0;
+    });
 
   const onDeleteItem = async (item_id: string) => {
     try {

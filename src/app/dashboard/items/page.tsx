@@ -14,12 +14,16 @@ const ItemPage: React.FC = () => {
   const router = useRouter();
 
   const searchQueryFromParams = searchParams.get("search") || "";
-
   const [searchQuery, setSearchQuery] = useState(searchQueryFromParams);
+  const [sortOrder, setSortOrder] = useState("");
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     router.push(`?search=${encodeURIComponent(query)}`);
+  };
+
+  const handleSortChange = (order: string) => {
+    setSortOrder(order);
   };
 
   return (
@@ -29,9 +33,10 @@ const ItemPage: React.FC = () => {
         <SearchBar
           placeholder="Search item ID.."
           onSearch={handleSearch}
+          onSortChange={handleSortChange}
           isStockPage={false}
         />
-        <ItemTable searchQuery={searchQuery} />
+        <ItemTable searchQuery={searchQuery} sortOrder={sortOrder} />
         {isModalOpen && <AddItem closeModal={closeModal} addItem={addItem} />}
       </div>
     </DefaultLayouts>
