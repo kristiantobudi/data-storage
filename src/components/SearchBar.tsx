@@ -2,30 +2,34 @@
 import React from "react";
 import { MdOutlineDateRange } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
-import { useRouter } from "next/navigation";
 import { useRef } from "react";
 
 interface SearchProps {
   placeholder: string;
+  onSearch: (query: string) => void;
   isStockPage?: boolean;
 }
 
-const SearchBar: React.FC<SearchProps> = ({ placeholder, isStockPage }) => {
+const SearchBar: React.FC<SearchProps> = ({
+  placeholder,
+  onSearch,
+  isStockPage,
+}) => {
   const searchRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
 
   const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (searchRef.current) {
       const keyword = searchRef.current.value;
-      if (!keyword || keyword.trim() === "") return;
-      router.push(`./dashboard/items/${encodeURIComponent(keyword)}`);
+      if (!keyword || keyword.trim() === "") {
+        onSearch("");
+        return onSearch(keyword);
+      }
+      onSearch(keyword);
     }
   };
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      handleSearch(event);
-    }
+  const handleKeyPress = (event: any) => {
+    handleSearch(event);
   };
 
   return (
@@ -36,7 +40,7 @@ const SearchBar: React.FC<SearchProps> = ({ placeholder, isStockPage }) => {
           ref={searchRef}
           placeholder={placeholder}
           className="w-full pl-10 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
-          onKeyDown={handleKeyPress}
+          onChange={handleKeyPress}
         />
       </div>
       <div className="flex flex-row space-x-2 gap-2">
