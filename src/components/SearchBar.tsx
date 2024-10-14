@@ -1,18 +1,18 @@
 "use client";
-import React from "react";
-import { MdOutlineDateRange } from "react-icons/md";
+import React, { useRef } from "react";
 import { IoMdSearch } from "react-icons/io";
-import { useRef } from "react";
 
 interface SearchProps {
   placeholder: string;
   onSearch: (query: string) => void;
+  onSortChange: (sortOrder: string) => void;
   isStockPage?: boolean;
 }
 
 const SearchBar: React.FC<SearchProps> = ({
   placeholder,
   onSearch,
+  onSortChange,
   isStockPage,
 }) => {
   const searchRef = useRef<HTMLInputElement>(null);
@@ -22,7 +22,7 @@ const SearchBar: React.FC<SearchProps> = ({
       const keyword = searchRef.current.value;
       if (!keyword || keyword.trim() === "") {
         onSearch("");
-        return onSearch(keyword);
+        return;
       }
       onSearch(keyword);
     }
@@ -30,6 +30,11 @@ const SearchBar: React.FC<SearchProps> = ({
 
   const handleKeyPress = (event: any) => {
     handleSearch(event);
+  };
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const sortOrder = event.target.value;
+    onSortChange(sortOrder);
   };
 
   return (
@@ -44,28 +49,14 @@ const SearchBar: React.FC<SearchProps> = ({
         />
       </div>
       <div className="flex flex-row space-x-2 gap-2">
-        <div className="px-2 py-2 border-purple-800 border rounded focus:outline-none focus:ring-2 focus:ring-purple-500 transition-al justify-center items-center">
-          <MdOutlineDateRange className="w-4 h-10" />
-        </div>
-        <select className="px-4 py-2 bg-white text-purple-800 border-purple-800 border rounded focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
-          <option value="">Status</option>
-          <option value="">Status1</option>
-          <option value="">Status2</option>
+        <select
+          className="px-4 py-2 bg-white text-purple-800 border-purple-800 border rounded focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+          onChange={handleSortChange}
+        >
+          <option value="">Sort by</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
         </select>
-        {!isStockPage && (
-          <>
-            <select className="px-4 py-2 bg-white text-purple-800 border-purple-800 border rounded focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
-              <option value="">Sales</option>
-              <option value="">Sales1</option>
-              <option value="">Sales2</option>
-            </select>
-            <select className="px-4 py-2 bg-white text-purple-800 border-purple-800 border rounded focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
-              <option value="">Filter</option>
-              <option value="">Filter1</option>
-              <option value="">Filter2</option>
-            </select>
-          </>
-        )}
       </div>
     </div>
   );
