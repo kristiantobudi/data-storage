@@ -55,7 +55,7 @@ export default function DropdownAuth() {
       </Link>
       {dropdownOpen && (
         <div
-          className={`absolute right-0 mt-4 flex w-60 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark`}
+          className={`absolute right-0 mt-4 flex w-60 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark z-50`}
         >
           <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7 dark:border-strokedark">
             <li className="flex items-center gap-3">

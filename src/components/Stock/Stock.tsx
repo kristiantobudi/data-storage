@@ -8,6 +8,7 @@ export default function Stock() {
   const fetchStockItem = useCallback(async () => {
     try {
       const response = await getAllStock();
+      console.log(response.data.data);
       if (response.data && response.data.data.length > 0) {
         setIsStock(response.data.data);
       }
