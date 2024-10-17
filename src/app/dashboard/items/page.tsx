@@ -34,7 +34,6 @@ const ItemPage: React.FC = () => {
           placeholder="Search item ID.."
           onSearch={handleSearch}
           onSortChange={handleSortChange}
-          isStockPage={false}
         />
         <ItemTable searchQuery={searchQuery} sortOrder={sortOrder} />
         {isModalOpen && <AddItem closeModal={closeModal} addItem={addItem} />}
