@@ -2,7 +2,12 @@ import { getAllStock } from "@/client/stock";
 import { StockType } from "@/types/stockType";
 import { useState, useEffect, useCallback } from "react";
 
-export default function Stock() {
+interface StockProps {
+  searchQuery: string;
+  sortOrder: string;
+}
+
+export default function Stock({ searchQuery, sortOrder }: StockProps) {
   const [isStock, setIsStock] = useState<StockType[]>([]);
 
   const fetchStockItem = useCallback(async () => {
@@ -20,6 +25,7 @@ export default function Stock() {
   useEffect(() => {
     fetchStockItem();
   }, [fetchStockItem]);
+
 
   return (
     <>

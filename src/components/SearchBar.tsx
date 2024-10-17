@@ -6,14 +6,12 @@ interface SearchProps {
   placeholder: string;
   onSearch: (query: string) => void;
   onSortChange: (sortOrder: string) => void;
-  isStockPage?: boolean;
 }
 
 const SearchBar: React.FC<SearchProps> = ({
   placeholder,
   onSearch,
   onSortChange,
-  isStockPage,
 }) => {
   const searchRef = useRef<HTMLInputElement>(null);
 
