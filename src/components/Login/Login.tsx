@@ -9,6 +9,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Controller } from "react-hook-form";
 import { useLogin } from "./useLogin";
 import { useToggle } from "@/hooks/useToggle";
+import LoginProficePic from "../../../public/login.jpg";
 
 export default function Login() {
   const { bindInput } = useFormHelper<LoginSchemaType>();
@@ -115,7 +116,7 @@ export default function Login() {
           <div className="ml-4">
             <div className="p-6">
               <Image
-                src="/images/login.jpg"
+                src={LoginProficePic}
                 className="p-2 rounded-lg"
                 alt="login"
                 width={500}

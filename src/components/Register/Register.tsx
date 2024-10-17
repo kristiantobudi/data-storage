@@ -8,6 +8,7 @@ import { useFormHelper } from "@/hooks";
 import { Controller } from "react-hook-form";
 import { useRegister } from "./useRegister";
 import { useToggle } from "@/hooks/useToggle";
+import RegisterProfilePic from "../../../public/images/register.jpg";
 
 export default function Register() {
   const { bindInput } = useFormHelper<RegisterSchemaType>();
@@ -159,7 +160,7 @@ export default function Register() {
           <div className="ml-4">
             <div className="flex items-center justify-center">
               <Image
-                src="/images/register.jpg"
+                src={RegisterProfilePic}
                 className="p-2 rounded-lg"
                 alt="Register image"
                 width={400}
