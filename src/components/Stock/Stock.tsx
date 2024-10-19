@@ -44,9 +44,9 @@ export default function Stock() {
                 <td className="py-4">
                   <input type="checkbox" className="form-checkbox" />
                 </td>
-                <td>{stock.item}</td>
+                <td>{stock.itemName}</td>
                 <td>{stock.quantity_change}</td>
-                <td>{stock.reason}</td>
+                <td>{stock.action}</td>
               </tr>
             ))}
           </tbody>
