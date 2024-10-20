@@ -52,7 +52,7 @@ export default function Stock({ searchQuery, sortOrder }: StockProps) {
           </tr>
         </thead>
         <tbody>
-          {sortedStock.map((stock) => (
+          {sortedStock?.map((stock) => (
             <tr key={stock._id} className="border border-gray-400 text-center">
               <td className="py-4">
                 <input type="checkbox" className="form-checkbox" />
