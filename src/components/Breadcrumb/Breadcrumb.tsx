@@ -14,7 +14,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ pageName }) => {
         <ol className="flex items-center gap-2">
           <li>
             <Link href="/" passHref>
-              <p className="font-medium text-gray-500">Dashboard /</p>
+              <p className="font-semibold text-gray-900">Dashboard /</p>
             </Link>
           </li>
           <li className="font-medium text-gray-500">{pageName}</li>
