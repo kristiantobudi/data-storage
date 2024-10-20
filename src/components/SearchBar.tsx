@@ -14,8 +14,8 @@ const SearchBar: React.FC<SearchProps> = ({
   onSortChange,
 }) => {
   const searchRef = useRef<HTMLInputElement>(null);
+
   const handleSearch = () => {
-  const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (searchRef.current) {
       const keyword = searchRef.current.value;
       if (!keyword || keyword.trim() === "") {
@@ -28,8 +28,6 @@ const SearchBar: React.FC<SearchProps> = ({
 
   const handleKeyPress = () => {
     handleSearch();
-  const handleKeyPress = (event: any) => {
-    handleSearch(event);
   };
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
