@@ -1,4 +1,5 @@
 "use client";
+
 import { Suspense, useState } from "react";
 import ItemTable from "@/components/Items";
 import Header from "@/components/Header/Header";
@@ -42,10 +43,15 @@ const ItemPage: React.FC = () => {
   );
 };
 
-const SuspanseItemWrapper = () => {
-  <Suspense>
-    <ItemPage />
-  </Suspense>;
+const SuspenseItemWrapper = () => {
+  return (
+    <>
+      <Suspense>
+        <ItemPage />
+      </Suspense>
+      ;
+    </>
+  );
 };
 
-export default SuspanseItemWrapper;
+export default SuspenseItemWrapper;

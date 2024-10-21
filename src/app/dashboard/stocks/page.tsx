@@ -42,9 +42,14 @@ const StockPage: React.FC = () => {
 };
 
 const SuspenseStockWrapper = () => {
-  <Suspense>
-    <StockPage />
-  </Suspense>;
+  return (
+    <>
+      <Suspense>
+        <StockPage />
+      </Suspense>
+      ;
+    </>
+  );
 };
 
 export default SuspenseStockWrapper;
