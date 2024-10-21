@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import React from "react";
 import Header from "@/components/Header/Header";
 import SearchBar from "@/components/SearchBar";
@@ -41,4 +41,12 @@ const StockPage: React.FC = () => {
   );
 };
 
-export default StockPage;
+const StockPageWrapper = () => {
+  return (
+    <Suspense>
+      <StockPage />
+    </Suspense>
+  );
+};
+
+export default StockPageWrapper;

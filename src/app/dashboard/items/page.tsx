@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import ItemTable from "@/components/Items";
 import Header from "@/components/Header/Header";
 import SearchBar from "@/components/SearchBar";
@@ -42,4 +42,10 @@ const ItemPage: React.FC = () => {
   );
 };
 
-export default ItemPage;
+const ItemPageWrapper = () => {
+  <Suspense>
+    <ItemPage />
+  </Suspense>;
+};
+
+export default ItemPageWrapper;
