@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DeleteButton from "./Button/Delete";
 import UpdateItem from "./Button/Edit";
 import { ItemType } from "@/types/ItemTypes";
+import SkeletonLoader from "./Skeleton/Skeleton";
 
 interface ItemTableProps {
   searchQuery: string;
@@ -13,6 +14,7 @@ const ItemTable: React.FC<ItemTableProps> = ({ searchQuery, sortOrder }) => {
   const [isShowModalDelete, setIsShowModalDelete] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ItemType>();
   const [updatedItem, setUpdatedItem] = useState<ItemType>();
+  const [isLoading, setIsLoading] = useState(true);
 
   const [items, setItems] = useState<ItemType[]>([]);
 
@@ -28,6 +30,8 @@ const ItemTable: React.FC<ItemTableProps> = ({ searchQuery, sortOrder }) => {
       setItems(resData.data);
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -131,6 +135,8 @@ const ItemTable: React.FC<ItemTableProps> = ({ searchQuery, sortOrder }) => {
   useEffect(() => {
     setUpdatedItem(selectedItem);
   }, [selectedItem]);
+
+  const skeletonRows = Array(5).fill(null);
 
   return (
     <>
@@ -276,30 +282,47 @@ const ItemTable: React.FC<ItemTableProps> = ({ searchQuery, sortOrder }) => {
             </tr>
           </thead>
           <tbody>
-            {filteredItems?.map((item) => (
-              <tr key={item._id} className="border border-gray-400 text-center">
-                <td className="py-4">
-                  <input type="checkbox" className="form-checkbox" />
-                </td>
-                <td>{item.item_name}</td>
-                <td>{item.sku}</td>
-                <td>{item.quantity}</td>
-                <td>{item.category}</td>
-                <td>{item.storage_location}</td>
-                <td className="flex justify-center space-x-2 py-2">
-                  <UpdateItem
-                    onClick={() => {
-                      onClickButtonEdit(item);
-                    }}
-                  />
-                  <DeleteButton
-                    onClick={() => {
-                      onClickButtonDelete(item);
-                    }}
-                  />
+            {isLoading ? (
+              skeletonRows.map((_, index) => (
+                <tr key={index} className="border border-gray-400">
+                  <SkeletonLoader columnCount={7} />
+                </tr>
+              ))
+            ) : filteredItems.length === 0 ? (
+              <tr>
+                <td colSpan={7} className="text-center py-4">
+                  No items found
                 </td>
               </tr>
-            ))}
+            ) : (
+              filteredItems?.map((item) => (
+                <tr
+                  key={item._id}
+                  className="border border-gray-400 text-center"
+                >
+                  <td className="py-4">
+                    <input type="checkbox" className="form-checkbox" />
+                  </td>
+                  <td>{item.item_name}</td>
+                  <td>{item.sku}</td>
+                  <td>{item.quantity}</td>
+                  <td>{item.category}</td>
+                  <td>{item.storage_location}</td>
+                  <td className="flex justify-center space-x-2 py-2">
+                    <UpdateItem
+                      onClick={() => {
+                        onClickButtonEdit(item);
+                      }}
+                    />
+                    <DeleteButton
+                      onClick={() => {
+                        onClickButtonDelete(item);
+                      }}
+                    />
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

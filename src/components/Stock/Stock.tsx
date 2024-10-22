@@ -1,6 +1,7 @@
 import { getAllStock } from "@/client/stock";
 import { StockType } from "@/types/stockType";
 import { useState, useEffect, useCallback } from "react";
+import SkeletonLoader from "../Skeleton/Skeleton";
 
 interface StockProps {
   searchQuery: string;
@@ -9,6 +10,7 @@ interface StockProps {
 
 export default function Stock({ searchQuery, sortOrder }: StockProps) {
   const [isStock, setIsStock] = useState<StockType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchStockItem = useCallback(async () => {
     try {
@@ -18,6 +20,8 @@ export default function Stock({ searchQuery, sortOrder }: StockProps) {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -38,6 +42,8 @@ export default function Stock({ searchQuery, sortOrder }: StockProps) {
     return 0;
   });
 
+  const skeletonRows = Array(5).fill(null);
+
   return (
     <div className="flex-grow w-full bg-white text-purple-950">
       <table className="w-full border border-gray-300">
@@ -52,16 +58,33 @@ export default function Stock({ searchQuery, sortOrder }: StockProps) {
           </tr>
         </thead>
         <tbody>
-          {sortedStock?.map((stock) => (
-            <tr key={stock._id} className="border border-gray-400 text-center">
-              <td className="py-4">
-                <input type="checkbox" className="form-checkbox" />
+          {isLoading ? (
+            skeletonRows.map((_, index) => (
+              <tr key={index} className="border border-gray-400">
+                <SkeletonLoader columnCount={4} />{" "}
+              </tr>
+            ))
+          ) : sortedStock.length === 0 ? (
+            <tr>
+              <td colSpan={4} className="p-4 text-center">
+                No stock items found.
               </td>
-              <td>{stock.itemName}</td>
-              <td>{stock.quantity_change}</td>
-              <td>{stock.action}</td>
             </tr>
-          ))}
+          ) : (
+            sortedStock.map((stock) => (
+              <tr
+                key={stock._id}
+                className="border border-gray-400 text-center"
+              >
+                <td className="py-4">
+                  <input type="checkbox" className="form-checkbox" />
+                </td>
+                <td>{stock.itemName}</td>
+                <td>{stock.quantity_change}</td>
+                <td>{stock.action}</td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
