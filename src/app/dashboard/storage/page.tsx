@@ -3,14 +3,15 @@
 import { Suspense, useState } from "react";
 import Header from "@/components/Header/Header";
 import SearchBar from "@/components/SearchBar";
-import AddItem from "@/components/Header/AddItem";
+import AddStorage from "@/components/Header/AddStorage";
 import { useModal } from "@/components/Header/useHeader";
 import DefaultLayouts from "@/components/Layouts/DefaultLayouts";
 import { useSearchParams, useRouter } from "next/navigation";
 import StorageTable from "@/components/Storage/Storage";
 
 const StoragePage: React.FC = () => {
-  const { addItem, isModalOpen, closeModal, openModal } = useModal();
+  const { addItem } = useModal();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -27,6 +28,14 @@ const StoragePage: React.FC = () => {
     setSortOrder(order);
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <DefaultLayouts>
       <div className="flex flex-col min-h-screen">
@@ -41,7 +50,9 @@ const StoragePage: React.FC = () => {
           onSortChange={handleSortChange}
         />
         <StorageTable searchQuery={searchQuery} sortOrder={sortOrder} />
-        {isModalOpen && <AddItem closeModal={closeModal} addItem={addItem} />}
+        {isModalOpen && (
+          <AddStorage closeModal={closeModal} addItem={addItem} />
+        )}
       </div>
     </DefaultLayouts>
   );
