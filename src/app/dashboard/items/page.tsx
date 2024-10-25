@@ -10,7 +10,8 @@ import DefaultLayouts from "@/components/Layouts/DefaultLayouts";
 import { useSearchParams, useRouter } from "next/navigation";
 
 const ItemPage: React.FC = () => {
-  const { addItem, isModalOpen, closeModal, openModal } = useModal();
+  const { addItem } = useModal();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -25,6 +26,14 @@ const ItemPage: React.FC = () => {
 
   const handleSortChange = (order: string) => {
     setSortOrder(order);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
