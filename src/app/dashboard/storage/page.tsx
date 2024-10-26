@@ -1,15 +1,15 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import ItemTable from "@/components/Items";
 import Header from "@/components/Header/Header";
 import SearchBar from "@/components/SearchBar";
-import AddItem from "@/components/Header/AddItem";
+import AddStorage from "@/components/Header/AddStorage";
 import { useModal } from "@/components/Header/useHeader";
 import DefaultLayouts from "@/components/Layouts/DefaultLayouts";
 import { useSearchParams, useRouter } from "next/navigation";
+import StorageTable from "@/components/Storage/Storage";
 
-const ItemPage: React.FC = () => {
+const StoragePage: React.FC = () => {
   const { addItem } = useModal();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const searchParams = useSearchParams();
@@ -39,28 +39,34 @@ const ItemPage: React.FC = () => {
   return (
     <DefaultLayouts>
       <div className="flex flex-col min-h-screen">
-        <Header title="Items" button_name="Add Item" openModal={openModal} />
+        <Header
+          title="Storage"
+          button_name="Add Storage"
+          openModal={openModal}
+        />
         <SearchBar
-          placeholder="Search item name.."
+          placeholder="Search storage name.."
           onSearch={handleSearch}
           onSortChange={handleSortChange}
         />
-        <ItemTable searchQuery={searchQuery} sortOrder={sortOrder} />
-        {isModalOpen && <AddItem closeModal={closeModal} addItem={addItem} />}
+        <StorageTable searchQuery={searchQuery} sortOrder={sortOrder} />
+        {isModalOpen && (
+          <AddStorage closeModal={closeModal} addItem={addItem} />
+        )}
       </div>
     </DefaultLayouts>
   );
 };
 
-const SuspenseItemWrapper = () => {
+const SuspenseStorageWrapper = () => {
   return (
     <>
       <Suspense>
-        <ItemPage />
+        <StoragePage />
       </Suspense>
       ;
     </>
   );
 };
 
-export default SuspenseItemWrapper;
+export default SuspenseStorageWrapper;
