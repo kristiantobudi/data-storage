@@ -80,8 +80,8 @@ export default function Stock({ searchQuery, sortOrder }: StockProps) {
                   <input type="checkbox" className="form-checkbox" />
                 </td>
                 <td>{stock.itemName}</td>
-                <td>{stock.quantity_change}</td>
-                <td>{stock.action}</td>
+                <td>{stock.history[0].quantity}</td>
+                <td>{stock.history[0].action}</td>
               </tr>
             ))
           )}

@@ -2,10 +2,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface SidebarItemType {
+  name: string;
   route: string;
-  label: string;
   svg: JSX.Element;
-  children?: SidebarItemType[];
+  label: string;
+  children?: { label: string; route: string }[];
 }
 
 interface SidebarItemProps {
@@ -15,18 +16,22 @@ interface SidebarItemProps {
 }
 
 const SidebarItem = ({ item, pageName, setPageName }: SidebarItemProps) => {
+  const pathname = usePathname();
+
   const handleClick = () => {
     const updatePageName =
       pageName !== item.label.toLowerCase() ? item.label.toLowerCase() : "";
     setPageName(updatePageName);
   };
 
-  const pathname = usePathname(); // Call usePathname function here
-
-  const isActive = (item: SidebarItemType): boolean => {
-    if (item.route === pathname) return true;
-    if (item.children) {
-      return item.children.some((child) => isActive(child));
+  const isActive = (
+    currentItem: SidebarItemType | { label: string; route: string }
+  ): boolean => {
+    if (currentItem.route === pathname) return true;
+    if ("children" in currentItem) {
+      return (
+        currentItem.children?.some((child) => child.route === pathname) ?? false
+      );
     }
     return false;
   };
@@ -38,15 +43,17 @@ const SidebarItem = ({ item, pageName, setPageName }: SidebarItemProps) => {
       <Link
         href={item.route}
         onClick={handleClick}
-        className={`${
-          isItemActive ? "bg-[#DBE2EF] text-[#F9F7F7]" : ""
-        } group relative flex items-center gap-2 px-4 py-2 font-medium text-gray-800 duration-300 ease-in-out hover:text-white hover:bg-[#3F72AF] rounded-lg`}
+        className={`group relative flex items-center gap-2 px-4 py-2 font-medium duration-300 ease-in-out rounded-lg ${
+          isItemActive
+            ? "bg-[#3F72AF] text-[#F9F7F7]"
+            : "text-gray-800 hover:text-white hover:bg-[#3F72AF]"
+        }`}
       >
         {item.svg}
         {item.label}
         {item.children && (
           <svg
-            className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
+            className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current transition-transform duration-200 ease-in-out ${
               pageName === item.label.toLowerCase() ? "rotate-180" : ""
             }`}
             width="20"
@@ -64,6 +71,25 @@ const SidebarItem = ({ item, pageName, setPageName }: SidebarItemProps) => {
           </svg>
         )}
       </Link>
+
+      {item.children && pageName === item.label.toLowerCase() && (
+        <ul className="mt-4 space-y-2 border-l-2 border-gray-200 pl-5">
+          {item.children.map((child, index) => (
+            <li key={index}>
+              <Link
+                href={child.route}
+                className={`group flex items-center gap-2 px-4 py-2 text-sm font-medium duration-300 ease-in-out rounded-lg ${
+                  pathname === child.route
+                    ? "bg-[#3F72AF] text-[#F9F7F7]"
+                    : "text-gray-800 hover:text-white hover:bg-[#3F72AF]"
+                }`}
+              >
+                {child.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </li>
   );
 };
