@@ -12,6 +12,7 @@ interface SidebarItemType {
   route: string;
   svg: JSX.Element;
   label: string;
+  children?: { label: string; route: string }[];
 }
 
 interface MenuGroupType {
@@ -30,9 +31,19 @@ export const MenuSidebar: MenuGroupType = {
     },
     {
       name: "Items",
-      route: "/dashboard/items",
+      route: "#",
       svg: <ItemIcon />,
-      label: "Items",
+      label: "Products",
+      children: [
+        {
+          label: "Item",
+          route: "/dashboard/items",
+        },
+        {
+          label: "Supplier",
+          route: "/dashboard/suppliers",
+        },
+      ],
     },
     {
       name: "Stocks",

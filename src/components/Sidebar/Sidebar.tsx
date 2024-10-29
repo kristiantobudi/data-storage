@@ -10,11 +10,18 @@ interface SidebarProps {
   setSidebarOpen: (arg: boolean) => void;
 }
 
+interface SidebarSubItemType {
+  label: string;
+  route: string;
+  svg?: JSX.Element;
+}
+
 interface SidebarItemType {
   name: string;
   route: string;
   svg: JSX.Element;
   label: string;
+  children?: SidebarSubItemType[];
 }
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
