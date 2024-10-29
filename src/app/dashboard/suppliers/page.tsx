@@ -49,10 +49,7 @@ const Suppliers: React.FC = () => {
       />
       <Supplier searchQuery={searchQuery} sortOrder={sortOrder} />
       {isModalOpen && (
-        <AddSupplier
-          closeModal={closeModal} // Changed from onClose to closeModal
-          addSupplier={addSupplier} // This matches the prop name in AddSupplier
-        />
+        <AddSupplier closeModal={closeModal} addSupplier={addSupplier} />
       )}
     </DefaultLayouts>
   );

@@ -5,6 +5,7 @@ import { ApexOptions } from "apexcharts";
 
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
+
 export default function ChartOne() {
   const [chartOptions] = useState<ApexOptions>({
     chart: {

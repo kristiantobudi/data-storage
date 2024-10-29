@@ -31,9 +31,9 @@ export const MenuSidebar: MenuGroupType = {
     },
     {
       name: "Items",
-      route: "/dashboard/items",
+      route: "#",
       svg: <ItemIcon />,
-      label: "Items",
+      label: "Products",
       children: [
         {
           label: "Item",
