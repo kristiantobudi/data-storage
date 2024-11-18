@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import DefaultLayouts from "@/components/Layouts/DefaultLayouts";
+import IncomingTable from "@/components/Transactions/Incoming/IncomingTable";
 
 interface IncomingItem {
   date: string;
@@ -33,7 +34,7 @@ const IncomingPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setItems([...items, form]); // Menyimpan data form ke array items
+    setItems([...items, form]);
     setForm({
       date: "",
       supplierName: "",
@@ -47,10 +48,8 @@ const IncomingPage: React.FC = () => {
 
   return (
     <DefaultLayouts>
-      <div className="flex flex-col items-center min-h-screen p-6 bg-gray-50">
+      <div className="flex flex-col items-center min-h-screen p-6 bg-white">
         <h1 className="text-2xl font-semibold mb-6">Incoming Goods</h1>
-
-        {/* Form Input */}
         <form
           onSubmit={handleSubmit}
           className="w-full max-w-lg bg-white p-6 rounded-lg shadow-md mb-8"
@@ -168,40 +167,11 @@ const IncomingPage: React.FC = () => {
               type="submit"
               className="w-1/3 py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700"
             >
-              SAVE
+              Save
             </button>
           </div>
         </form>
-
-        {items.length > 0 && (
-          <div className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-lg font-semibold mb-4">Incoming Goods Table</h2>
-            <table className="min-w-full border">
-              <thead>
-                <tr>
-                  <th className="border px-4 py-2">Date</th>
-                  <th className="border px-4 py-2">Supplier</th>
-                  <th className="border px-4 py-2">Item</th>
-                  <th className="border px-4 py-2">Quantity</th>
-                  <th className="border px-4 py-2">Section</th>
-                  <th className="border px-4 py-2">Shelf</th>
-                </tr>
-              </thead>
-              <tbody>
-                {items.map((item, index) => (
-                  <tr key={index} className="text-center">
-                    <td className="border px-4 py-2">{item.date}</td>
-                    <td className="border px-4 py-2">{item.supplierName}</td>
-                    <td className="border px-4 py-2">{item.itemName}</td>
-                    <td className="border px-4 py-2">{item.quantity}</td>
-                    <td className="border px-4 py-2">{item.section}</td>
-                    <td className="border px-4 py-2">{item.shelf}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+        <IncomingTable items={items} />
       </div>
     </DefaultLayouts>
   );
