@@ -21,20 +21,19 @@ const TransactionPage: React.FC = () => {
           className="w-full max-w-md p-6 bg-white rounded-lg shadow-md cursor-pointer hover:bg-gray-100"
           onClick={goToBarangMasuk}
         >
-          <h2 className="text-xl font-semibold text-center">Barang Masuk</h2>
-          <p className="text-center text-gray-500">Lihat dan kelola barang masuk.</p>
+          <h2 className="text-xl font-semibold text-center">Incoming Goods</h2>
+          <p className="text-center text-gray-500">Manage Incoming Goods</p>
         </div>
         <div
           className="w-full max-w-md p-6 bg-white rounded-lg shadow-md cursor-pointer hover:bg-gray-100"
           onClick={goToBarangKeluar}
         >
-          <h2 className="text-xl font-semibold text-center">Barang Keluar</h2>
-          <p className="text-center text-gray-500">Lihat dan kelola barang keluar.</p>
+          <h2 className="text-xl font-semibold text-center">Outcoming Goods</h2>
+          <p className="text-center text-gray-500">Manage Outcoming Goods</p>
         </div>
       </div>
     </DefaultLayouts>
   );
 };
-
 
 export default TransactionPage;
